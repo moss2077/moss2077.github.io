@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+   <title>Max
+   </title>
+   <link rel="icon" href="images/1.ico">
+   <link rel="stylesheet" href="css/sidebar.css">
+
+
+
+   <!--
+   <link rel="stylesheet" href="css/style.css">
+   <link rel="stylesheet" href="css/style-2.css">
+   -->
+
+
+
+
+
+
+   <link rel="stylesheet" href="file/music-min.css">
+   
+</head>
+<body style="background:url(images/home.jpg) no-repeat top left;background-size:cover;background-attachment:fixed;background-size:100%;">
+   <div id="wrapper" style="left:0;">
+      <!-- 侧边栏 -->
+      <div class="sidebar">
+         <div class="headSculpture">
+            <img src="images/侧边栏头像.jpg" alt="">
+            <p>MAX</p>
+         </div>
+         <div class="option">
+            <ul>
+               <li><img src="images/home.png" alt="">
+                <a href=index.html><p>首页</p></a>
+               </li>
+               <li><img src="images/works.png" alt="">
+                <a href="html/resources.html"><p>资源</p></a>
+                  <p>资源</p>
+               </li>
+               <li><img src="images/release.png" alt="">
+                  <a href="html/about me.html"><p>我</p></a>
+               </li>
+               <!--
+               <li><img src="images/collection.png" alt="">
+                  <p>我的收藏</p>
+               </li>
+               <li><img src="images/setup.png" alt="">
+                  <p>设置</p>
+               </li>
+                -->
+            </ul>
+         </div>
+      </div>
+      <!-- 侧边栏按钮 -->
+      <button> </button>
+      <!-- 内容区域 -->
+   </div>
+   <script src="js/jquery.min.js"></script>
+   <script src="js/sidebar.js"></script>
+
+
+
+   <script type="text/javascript">
+    ! function (e, t, a) {
+       function r() {
+           for (var e = 0; e < s.length; e++) s[e].alpha <= 0 ? (t.body.removeChild(s[e].el), s.splice(e, 1)) : (s[
+                   e].y--, s[e].scale += .004, s[e].alpha -= .013, s[e].el.style.cssText = "left:" + s[e].x +
+               "px;top:" + s[e].y + "px;opacity:" + s[e].alpha + ";transform:scale(" + s[e].scale + "," + s[e]
+               .scale + ") rotate(45deg);background:" + s[e].color + ";z-index:99999");
+           requestAnimationFrame(r)
+       }
+
+       function n() {
+           var t = "function" == typeof e.onclick && e.onclick;
+           e.onclick = function (e) {
+               t && t(), o(e)
+           }
+       }
+
+       function o(e) {
+           var a = t.createElement("div");
+           a.className = "heart", s.push({
+               el: a,
+               x: e.clientX - 5,
+               y: e.clientY - 5,
+               scale: 1,
+               alpha: 1,
+               color: c()
+           }), t.body.appendChild(a)
+       }
+
+       function i(e) {
+           var a = t.createElement("style");
+           a.type = "text/css";
+           try {
+               a.appendChild(t.createTextNode(e))
+           } catch (t) {
+               a.styleSheet.cssText = e
+           }
+           t.getElementsByTagName("head")[0].appendChild(a)
+       }
+
+       function c() {
+           return "rgb(" + ~~(255 * Math.random()) + "," + ~~(255 * Math.random()) + "," + ~~(255 * Math
+               .random()) + ")"
+       }
+       var s = [];
+       e.requestAnimationFrame = e.requestAnimationFrame || e.webkitRequestAnimationFrame || e
+           .mozRequestAnimationFrame || e.oRequestAnimationFrame || e.msRequestAnimationFrame || function (e) {
+               setTimeout(e, 1e3 / 60)
+           }, i(
+               ".heart{width: 10px;height: 10px;position: fixed;background: #f00;transform: rotate(45deg);-webkit-transform: rotate(45deg);-moz-transform: rotate(45deg);}.heart:after,.heart:before{content: '';width: inherit;height: inherit;background: inherit;border-radius: 50%;-webkit-border-radius: 50%;-moz-border-radius: 50%;position: fixed;}.heart:after{top: -5px;}.heart:before{left: -5px;}"
+           ), n(), r()
+   }(window, document);
+</script>
+
+
+<!--方块-->
+<style>
+   body {
+       overflow: hidden;
+   }
+   .twitter:hover a {
+       transform: rotate(-45deg) scale(1.05);
+   }
+   .twitter:hover i {
+       color: #21c2ff;
+   }
+   .twitter a {
+       bottom: -40px;
+       right: -75px;
+       transform: rotate(-45deg);
+   }
+   .twitter i {
+       bottom: 7px;
+       right: 7px;
+       color: #00ACED;
+   }
+   .social-icon a {
+       position: absolute;
+       background: white;
+       color: white;
+       box-shadow: -1px -1px 20px 0px rgba(0, 0, 0, 0.3);
+       display: inline-block;
+       width: 150px;
+       height: 80px;
+       transform-origin: 50% 50%;
+       transition: .15s ease-out;
+   }
+   .social-icon i {
+       position: absolute;
+       pointer-events: none;
+       z-index: 1000;
+       transition: .15s ease-out;
+   }
+   .youtube:hover a {
+       transform: rotate(45deg) scale(1.05);
+   }
+   .youtube:hover i {
+       color: #ec4c44;
+   }
+   .youtube a {
+       bottom: -40px;
+       left: -75px;
+       transform: rotate(45deg);
+   }
+   .youtube i {
+       bottom: 7px;
+       left: 7px;
+       color: #E62117;
+   }
+   </style>
+   </head>
+   <body>
+   <script src="js/jquery-1.11.1.min.js"></script>
+   <canvas></canvas>
+   <script>
+   // Goal - Create particles that travel based on angle of line
+   // Plan:
+   // 1x - Create particles that animate randomly outwards with a time to live (ttl)
+   // 2x - Create what are known as 'explosion points', points that create a line that particles will emanate from
+   // 3x - Create function that takes 2 points as input and creates 10 explosion points at intervals along the line created between the two
+   
+   "use strict";
+   
+   var canvas = document.querySelector('canvas');
+   var c = canvas.getContext('2d');
+   
+   canvas.width = window.innerWidth;
+   canvas.height = window.innerHeight;
+   
+   var mouse = {
+       x: window.innerWidth / 2,
+       y: 0
+   };
+   
+   window.addEventListener("mousemove", function(event) {
+       mouse.x = event.clientX;
+       mouse.y = event.clientY;
+   });
+   
+   canvas.addEventListener("touchmove", function(event) {
+       event.preventDefault();
+       mouse.x = event.touches[0].pageX;
+       mouse.y = event.touches[0].pageY;
+   });
+   
+   window.addEventListener("resize", function() {
+       canvas.width = window.innerWidth;
+       canvas.height = window.innerHeight;
+   });
+   
+   function Particle(x, y, radius, color) {
+       this.x = x;
+       this.y = y;
+       this.dx = (Math.random() - 0.5) * 1;
+       this.dy = (Math.random() - 0.5) * 1;
+       this.radius = radius;
+       this.color = color;
+       this.ttl = 0.45;
+       this.opacity = 1;
+   
+       this.update = function() {
+   
+           var diffX = mouse.x - canvas.width / 2 - this.x;
+           var diffY = mouse.y - canvas.height / 2 - this.y;
+           var dist2 = diffX * diffX + diffY * diffY + 1;
+           var ddx = 0.1 * Math.abs(diffX) * diffX / dist2;
+           var ddy = 0.1 * Math.abs(diffY) * diffY / dist2;
+           this.dx += ddx;
+           this.dy += ddy;
+   
+           this.x += this.dx;
+           this.y += this.dy;
+   
+           c.fillStyle = "rgba(120, 107, 215," + this.opacity + ")";
+           c.fill();
+   
+           this.draw();
+           // this.opacity -= 1 / (this.ttl / 0.01);
+           this.radius -= this.radius / (this.ttl / 0.005);
+           this.ttl -= 0.01;
+       };
+   
+       this.draw = function() {
+           c.beginPath();
+           c.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false);
+           c.fillStyle = this.color;
+           c.fill();
+           c.closePath();
+       };
+   }
+   
+   function ExplosionPoint(x, y) {
+   
+       this.x = x;
+       this.y = y;
+       this.particles = [];
+       this.timer = 0;
+   
+       this.update = function() {
+           this.timer += 1;
+   
+           if (this.timer % 4 === 0) {
+   
+               var radius = 4;
+               this.particles.push(new Particle(this.x, this.y, radius));
+           }
+   
+           for (var i = 0; i < this.particles.length; i++) {
+   
+               if (this.particles[i].ttl < 0) {
+   
+                   this.particles.splice[(i, 1)];
+               } else {
+   
+                   this.particles[i].update();
+               }
+           }
+       };
+   }
+   
+   /**
+    * Creates 8 explosion points across a line
+    *
+    *
+    * @return Void | Creates 8 points, returns nothing
+    */
+   function drawLine(x1, y1, x2, y2) {
+   
+       // y = mx + b
+   
+       var x = undefined,
+           y = undefined;
+       var m = (y2 - y1) / (x2 - x1);
+       var explosionAmount = 10;
+       var travelInterval = (x2 - x1) / explosionAmount;
+   
+       for (var i = 1; i <= explosionAmount; i++) {
+   
+           // Determine where the y intercept lies
+           // b = y intercept
+           var b = undefined;
+           if (x1 === 0) {
+               b = y1;
+           }
+   
+           if (x2 === 0) {
+               b = y2;
+           }
+   
+           // Get even interval x coordinate should change at
+           x = i * travelInterval + x1;
+           y = m * x + b;
+   
+           // If vertical or horizontal line
+           if (!isFinite(m)) {
+   
+               var yTravelInterval = (y2 - y1) / explosionAmount;
+   
+               y = i * yTravelInterval + y1;
+           }
+   
+           explosionPoints.push(new ExplosionPoint(x, y));
+       }
+   }
+   
+   var webpackImage = new Image();
+   webpackImage.src = 'img/webpack.png';
+   
+   var explosionPoints = [];
+   
+   c.save();
+   
+   c.translate(canvas.width / 2, canvas.height / 2);
+   
+   // Top box
+   drawLine(-115, -64, 0, -127);
+   drawLine(115, -64, 0, -127);
+   drawLine(0, 0, 115, -64);
+   drawLine(0, 0, -115, -64);
+   
+   // Bottom box
+   drawLine(0, 135, 120, 70);
+   drawLine(0, 135, -120, 70);
+   
+   // Outside lines that make up box height
+   drawLine(-120, -64, -120, 70);
+   drawLine(120, -64, 120, 70);
+   
+   // Middle lines
+   drawLine(0, -10, 0, 135);
+   
+   c.restore();
+   
+   function animate() {
+   
+       window.requestAnimationFrame(animate);
+   
+       c.clearRect(0, 0, canvas.width, canvas.height);
+   
+       c.save();
+   
+       c.translate(canvas.width / 2, canvas.height / 2);
+   
+       c.drawImage(webpackImage, -175, -130, 350, 391);
+   
+       for (var i = 0; i < explosionPoints.length; i++) {
+           explosionPoints[i].update();
+       }
+   
+       // c.fillText((mouse.x - (canvas.width / 2)) + ", " + (mouse.y - (canvas.height / 2)), mouse.x - (canvas.width / 2) - 50, mouse.y - (canvas.height / 2));
+   
+       c.restore();
+   }
+   animate();
+   </script>
+
+
+
+
+
+
+
+
+
+
+
+
+<!--日历
+<div class="calendar" style="float:left">
+	<div class="pages"></div>
+</div>
+<script  src="js/index.js" style="float:left"></script>
+-->
+
+
+
+
+<!--gif
+<div align="center">
+<img src="img/1.GIF">
+</div>
+-->
+
+
+
+   <!--音乐播放器-->
+   <audio id="music" preload="metadata">
+      <source src="file/whkl.mp3" type="audio/mpeg">
+  </audio>
+  
+  <div class="circle"><div class="imgs"></div>
+     <div class="share">
+        <button id="star" onClick="star()"><i class="icon"><i class="icon icon-del icon-star"></i></i></button>
+     </div>
+     <ul>
+      <li><div id="yl"><span class="ytext">100</span><div id="yi" onClick="cours()"><div id="yn"></div></div><span class="bol"></span></div><button onClick="song()"><i class="icon"><i class="icon icon-del icon-yin"></i></i></button></li>
+      <li><button><i class="icon"><div id="musicLists"><ul id="ls"></ul></div><i class="icon icon-del icon-lis"></i></i></button></li>
+      <!--
+      <li><button onClick="upMusic()"><i class="icon"><i class="icon icon-del icon-lef"></i></i></button></li>
+      <li><button onClick="dowMusic()"><i class="icon"><i class="icon icon-del icon-rig"></i></i></button></li>
+      -->
+   </ul>
+  </div>
+  
+  <script src="file/music-min.js" type="text/javascript"></script>
+   <!--公仔
+<script src="https://eqcn.ajz.miesnfu.com/wp-content/plugins/wp-3d-pony/live2dw/lib/L2Dwidget.min.js"></script><script>L2Dwidget.init({"model": { jsonPath:"https://unpkg.com/live2d-widget-model-koharu@1.0.5/assets/koharu.model.json","scale": 1 },"display": {"position":"right","width": 86,"height": 175,"hOffset": 0,"vOffset": -50 },"mobile": {"show": true,"scale": 1 },"react": {"opacityDefault": 1,"opacityOnHover": 0.2 }}); </script>
+-->
+
+
+<!--看板娘 -自定义大小，隐藏对话框和对话框高度-->
+<style type="text/css">   
+    #waifu #live2d {       
+          height: 180px!important;        
+          width: 180px!important;   
+    }
+    #waifu-tips {        
+                top: -60px;
+                #display:none !important; #隐藏对话框*/
+                }</style>
+     <!--看板娘加载指定模型-->
+     
+     <script>
+             localStorage.setItem('modelId', '1');  
+             localStorage.setItem('modelTexturesId', '1');
+     </script>
+     
+     <!--配置看板娘左右位置-->
+     <script src="https://api.itggg.cn/live2dnew/right/index.js"> </script>
+    </head>
+    <body class="mdui-theme-primary-pink mdui-theme-accent-pink">
+      <div class="background"><div class="index-filter"></div></div>
+    
+      <div class="mdui-appbar mdui-shadow-0 mdui-appbar-fixed mdui-appbar-scroll-hide">
+        <div class="mdui-toolbar">
+          <a class="mdui-btn mdui-btn-icon" mdui-drawer="{target: '.drawer', swipe: 'true', overlay: 'false'}">
+            <i class="mdui-icon material-icons">menu</i>
+          </a>
+          <a href="https://www.lovepcos.com/" class="mdui-typo-title">Lovepc Studio</a>
+          <div class="mdui-toolbar-spacer"></div>
+          <div class="mdui-textfield mdui-textfield-expandable mdui-float-right appbar-search">
+            <button class="mdui-textfield-icon mdui-btn mdui-btn-icon"><i class="mdui-icon material-icons">search</i></button>
+            <form id="search" method="post" action="https://www.lovepcos.com/" role="search">
+              <input class="mdui-textfield-input" type="text" id="s" name="s" placeholder="搜索一下" />
+              <button type="submit" style="display:none;">搜索</button>
+            </form>
+            <button class="mdui-textfield-close mdui-btn mdui-btn-icon"><i class="mdui-icon material-icons">close</i></button>
+          </div>
+          <button class="mdui-btn mdui-btn-icon qrcode" mdui-menu="{target: '#qrcode'}" mdui-tooltip="{content: '跨设备阅读'}"><i class="mdui-icon material-icons">devices</i></button>
+          <div class="mdui-menu" id="qrcode" style="width: 170px;height: 170px;transform-origin: 100% 0px; position: fixed; text-align:center;"><div style='margin-top: 63px;' class="mdui-spinner mdui-spinner-colorful"></div></div>
+          <button onclick="brightness()" id="brightness" class="mdui-textfield-close mdui-btn mdui-btn-icon"><i class="mdui-icon material-icons">brightness_5</i></button>
+          <button onclick="tocBotton()" id="tocBotton" class="mdui-textfield-close mdui-btn mdui-btn-icon"><i class="mdui-icon material-icons">bookmark</i></button>
+        </div>
+      </div>
+
+
+
+
+
+
+
+
+
+<!--title-->
+<script type="text/javascript" src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script><script type="text/javascript">$(document).ready(function(){var OriginTitile = document.title; var titleTime;document.addEventListener('visibilitychange', function(){
+    if (document.hidden){
+        document.title = '歪，你去哪里了？';
+        clearTimeout(titleTime);
+    }else{
+        document.title = '(つェ⊂)咦，又回来了!';
+        titleTime = setTimeout(function() {
+            document.title = OriginTitile;
+        }, 2000); // 2秒后恢复原标题  
+    }
+});});</script><script type="text/javascript" src="https://www.lovepcos.com/usr/plugins/Meting/assets/Meting.min.js?v=2.1.2"></script>
+<script>$(document).on('pjax:complete',function(){if(!$('.post-content').length){ $('.qrcode').css('display', 'none')}else{ $('.qrcode').css('display', 'block')};Hitokoto();});</script>
+</body>
+</html>
