@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="zn-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="icon" href="../images/1.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>黄天华</title>
+    <link rel="stylesheet" href="../css/css3.css">
+
+
+
+
+
+
+
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/style-clock2.css">
+
+
+
+
+
+
+
+    <style>
+    figure{
+        width: 500px;
+        border: 1px solid #000;
+        padding: 1px;
+    }
+    figcaption{
+        text-align: center;
+        font-family: 'Courier New', Courier, monospace;
+    }
+</style>
+    <body style="background-color:pink;"></body>
+    <section class="curved"></section>
+</head>
+<body>
+   
+    <div align="center">
+        <img  1 src="../images/2.jpg" alt="Pulpit rock" width="200" height="200">
+    </div>
+    
+    <div>
+        <ul>
+            <p class="time">当前时间</p>
+        </ul>
+        <canvas id="canvas" style="width: 10%;" width="20" height="10"></canvas>
+        <script src="../js/clock.js"></script>    
+
+    </div>
+    <div align="center">
+    <h1>CORE</h1>
+    <hr>
+    <h2>个人简介：</h2>
+    <p1>姓名：黄天华</p1>
+    <br>
+    <p2>性别：男</p2>
+    <br>
+    <p3>就读学校：广东实验中学金湾学校</p3>
+    <br>
+    <br>
+    </div>
+
+
+
+<!--图片js-->
+
+<style>
+    .target {
+        width:1000px;
+        height:550px;
+        overflow:hidden;
+        position:relative;
+        margin:20px auto;
+    }
+    .target img {
+        position:absolute;
+        top:0;
+        left:0;
+        width:100%;
+        height:100%;
+    }
+</style>
+
+
+
+
+
+    
+	<div class="target" id="target-1">
+        <div>
+            <div><img src="images/t1.png"></div>
+            <!--
+            <div><img src="images/t2.png"></div>
+            -->
+            <div><img src="images/t3.png"></div>
+            <!--
+            <div><img src="images/t4.png"></div>
+            -->
+        </div>
+    </div>
+
+    <script src="../js/jquery.min-1.js"></script>
+        <script src="../js/HappyImage.min.js"></script>
+        <script>
+            $( "#target-1" ).HappyImage({
+            	effect: "slide"
+            });
+        </script>
+
+
+
+
+
+
+
+
+
+
+<!--时钟-->
+<div class="clock">
+    <div class="numbers">
+      <span style="--i:0;"><b>12</b></span>
+      <span style="--i:1;"><b>3</b></span>
+      <span style="--i:2;"><b>6</b></span>
+      <span style="--i:3;"><b>9</b></span>
+      <div class="circle" id="hr"><i></i></div>
+      <div class="circle" id="mn"><i></i></div>
+      <div class="circle" id="sc"><i></i></div>
+    </div>
+  </div>
+  <script src="../js/script-clock2.js"></script>
+
+
+
+
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+</body>
+
+
+
+
+
+
+
+
+
+
+
+
+<style>h1 {
+    color: black;
+    text-align: center;
+    font-family: "Times New Roman", Times, serif;
+  }
+  .curved {
+  position: relative;
+  background: #a3ccf5;
+  height: 25vh;
+  border-bottom-left-radius: 50% 39%;
+  border-bottom-right-radius: 50% 39%;
+}
+  </style>
+
+
+
+
+<br>
+
+
+
+
+<script>
+    function displayDate(){
+        document.getElementById("demo").innerHTML=Date();
+    }
+    </script>
+    <p id="demo">按下button</p>
+<button type="button" onclick="displayDate()">显示日期</button>
+  
+
+
+<button type="button" onclick="alert('你怎么傻傻的？')">点我!</button>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 图片查看器 -->
+<script type="text/javascript" src="js/viewer.min.js"></script>
+<script type="text/javascript" src="js/jquery-viewer.min.js"></script>
+<!-- 音乐播放器 -->
+<script type="text/javascript" src="js/APlayer.min.js"></script>
+<!--公仔
+<script src="https://eqcn.ajz.miesnfu.com/wp-content/plugins/wp-3d-pony/live2dw/lib/L2Dwidget.min.js"></script><script>L2Dwidget.init({"model": { jsonPath:"https://unpkg.com/live2d-widget-model-koharu@1.0.5/assets/koharu.model.json","scale": 1 },"display": {"position":"right","width": 86,"height": 175,"hOffset": 0,"vOffset": -50 },"mobile": {"show": true,"scale": 1 },"react": {"opacityDefault": 1,"opacityOnHover": 0.2 }}); </script>
+-->
+
+
+
+
+
+
+<!--title-->
+<script type="text/javascript" src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script><script type="text/javascript">$(document).ready(function(){var OriginTitile = document.title; var titleTime;document.addEventListener('visibilitychange', function(){
+    if (document.hidden){
+        document.title = '歪，你去哪里了？';
+        clearTimeout(titleTime);
+    }else{
+        document.title = '(つェ⊂)咦，又回来了!';
+        titleTime = setTimeout(function() {
+            document.title = OriginTitile;
+        }, 2000); // 2秒后恢复原标题  
+    }
+});});</script><script type="text/javascript" src="https://www.lovepcos.com/usr/plugins/Meting/assets/Meting.min.js?v=2.1.2"></script>
+<script>$(document).on('pjax:complete',function(){if(!$('.post-content').length){ $('.qrcode').css('display', 'none')}else{ $('.qrcode').css('display', 'block')};Hitokoto();});</script>
+</body>
+</html>
+
+</html>
