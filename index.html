@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>华</title>
+  <link rel="icon" href="image/1.ico">
+  <link rel="stylesheet" href="./css/style.css">
+  <link rel="stylesheet" href="css/sidebar.css">
+
+
+</head>
+<body>
+  <div class="navigation">
+    <ul>
+      <li class="list active">
+        <a href="index.html">
+          <span class="icon">
+            <ion-icon name="home-outline"></ion-icon>
+          </span>
+          <span class="text">主页</span>
+        </a>
+      </li>
+      
+      <li class="list">
+        <a href="html/resources.html">
+          <span class="icon">
+            <ion-icon name="chatbubble-outline"></ion-icon>
+          </span>
+          <span class="text">资源</span>
+        </a>
+      </li>
+      <li class="list">
+        <a href="	http://cn-yw-plc-1.openfrp.top:52693">
+          <span class="icon">
+            <ion-icon name="camera-outline"></ion-icon>
+          </span>
+          
+          <span class="text">图片</span>
+        </a>
+      </li>
+      <li class="list">
+        <a href="html/me.html">
+          <span class="icon">
+            <ion-icon name="person-outline"></ion-icon>
+          </span>
+          
+          <span class="text">我的</span>
+        </a>
+      </li>
+<!--
+      <li class="list">
+        <a href="#">
+          <span class="icon">
+            <ion-icon name="settings-outline"></ion-icon>
+          </span>
+
+          <span class="text">我的</span>
+        </a>
+      </li>
+      
+      <div class="indicator"></div>
+    </ul>
+-->
+  </div>
+
+
+
+<!--方块-->
+<style>
+  body {
+      overflow: hidden;
+  }
+  .twitter:hover a {
+      transform: rotate(-45deg) scale(1.05);
+  }
+  .twitter:hover i {
+      color: #21c2ff;
+  }
+  .twitter a {
+      bottom: -40px;
+      right: -75px;
+      transform: rotate(-45deg);
+  }
+  .twitter i {
+      bottom: 7px;
+      right: 7px;
+      color: #00ACED;
+  }
+  .social-icon a {
+      position: absolute;
+      background: white;
+      color: white;
+      box-shadow: -1px -1px 20px 0px rgba(0, 0, 0, 0.3);
+      display: inline-block;
+      width: 150px;
+      height: 80px;
+      transform-origin: 50% 50%;
+      transition: .15s ease-out;
+  }
+  .social-icon i {
+      position: absolute;
+      pointer-events: none;
+      z-index: 1000;
+      transition: .15s ease-out;
+  }
+  .youtube:hover a {
+      transform: rotate(45deg) scale(1.05);
+  }
+  .youtube:hover i {
+      color: #ec4c44;
+  }
+  .youtube a {
+      bottom: -40px;
+      left: -75px;
+      transform: rotate(45deg);
+  }
+  .youtube i {
+      bottom: 7px;
+      left: 7px;
+      color: #E62117;
+  }
+  </style>
+  
+  <body>
+  <script src="js/jquery-1.11.1.min.js"></script>
+  <canvas></canvas>
+  <script>
+  // Goal - Create particles that travel based on angle of line
+  // Plan:
+  // 1x - Create particles that animate randomly outwards with a time to live (ttl)
+  // 2x - Create what are known as 'explosion points', points that create a line that particles will emanate from
+  // 3x - Create function that takes 2 points as input and creates 10 explosion points at intervals along the line created between the two
+  
+  "use strict";
+  
+  var canvas = document.querySelector('canvas');
+  var c = canvas.getContext('2d');
+  
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+  
+  var mouse = {
+      x: window.innerWidth / 2,
+      y: 0
+  };
+  
+  window.addEventListener("mousemove", function(event) {
+      mouse.x = event.clientX;
+      mouse.y = event.clientY;
+  });
+  
+  canvas.addEventListener("touchmove", function(event) {
+      event.preventDefault();
+      mouse.x = event.touches[0].pageX;
+      mouse.y = event.touches[0].pageY;
+  });
+  
+  window.addEventListener("resize", function() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+  });
+  
+  function Particle(x, y, radius, color) {
+      this.x = x;
+      this.y = y;
+      this.dx = (Math.random() - 0.5) * 1;
+      this.dy = (Math.random() - 0.5) * 1;
+      this.radius = radius;
+      this.color = color;
+      this.ttl = 0.45;
+      this.opacity = 1;
+  
+      this.update = function() {
+  
+          var diffX = mouse.x - canvas.width / 2 - this.x;
+          var diffY = mouse.y - canvas.height / 2 - this.y;
+          var dist2 = diffX * diffX + diffY * diffY + 1;
+          var ddx = 0.1 * Math.abs(diffX) * diffX / dist2;
+          var ddy = 0.1 * Math.abs(diffY) * diffY / dist2;
+          this.dx += ddx;
+          this.dy += ddy;
+  
+          this.x += this.dx;
+          this.y += this.dy;
+  
+          c.fillStyle = "rgba(120, 107, 215," + this.opacity + ")";
+          c.fill();
+  
+          this.draw();
+          // this.opacity -= 1 / (this.ttl / 0.01);
+          this.radius -= this.radius / (this.ttl / 0.005);
+          this.ttl -= 0.01;
+      };
+  
+      this.draw = function() {
+          c.beginPath();
+          c.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false);
+          c.fillStyle = this.color;
+          c.fill();
+          c.closePath();
+      };
+  }
+  
+  function ExplosionPoint(x, y) {
+  
+      this.x = x;
+      this.y = y;
+      this.particles = [];
+      this.timer = 0;
+  
+      this.update = function() {
+          this.timer += 1;
+  
+          if (this.timer % 4 === 0) {
+  
+              var radius = 4;
+              this.particles.push(new Particle(this.x, this.y, radius));
+          }
+  
+          for (var i = 0; i < this.particles.length; i++) {
+  
+              if (this.particles[i].ttl < 0) {
+  
+                  this.particles.splice[(i, 1)];
+              } else {
+  
+                  this.particles[i].update();
+              }
+          }
+      };
+  }
+  
+  /**
+   * Creates 8 explosion points across a line
+   *
+   *
+   * @return Void | Creates 8 points, returns nothing
+   */
+  function drawLine(x1, y1, x2, y2) {
+  
+      // y = mx + b
+  
+      var x = undefined,
+          y = undefined;
+      var m = (y2 - y1) / (x2 - x1);
+      var explosionAmount = 10;
+      var travelInterval = (x2 - x1) / explosionAmount;
+  
+      for (var i = 1; i <= explosionAmount; i++) {
+  
+          // Determine where the y intercept lies
+          // b = y intercept
+          var b = undefined;
+          if (x1 === 0) {
+              b = y1;
+          }
+  
+          if (x2 === 0) {
+              b = y2;
+          }
+  
+          // Get even interval x coordinate should change at
+          x = i * travelInterval + x1;
+          y = m * x + b;
+  
+          // If vertical or horizontal line
+          if (!isFinite(m)) {
+  
+              var yTravelInterval = (y2 - y1) / explosionAmount;
+  
+              y = i * yTravelInterval + y1;
+          }
+  
+          explosionPoints.push(new ExplosionPoint(x, y));
+      }
+  }
+  
+  var webpackImage = new Image();
+  webpackImage.src = 'img/webpack.png';
+  
+  var explosionPoints = [];
+  
+  c.save();
+  
+  c.translate(canvas.width / 2, canvas.height / 2);
+  
+  // Top box
+  drawLine(-115, -64, 0, -127);
+  drawLine(115, -64, 0, -127);
+  drawLine(0, 0, 115, -64);
+  drawLine(0, 0, -115, -64);
+  
+  // Bottom box
+  drawLine(0, 135, 120, 70);
+  drawLine(0, 135, -120, 70);
+  
+  // Outside lines that make up box height
+  drawLine(-120, -64, -120, 70);
+  drawLine(120, -64, 120, 70);
+  
+  // Middle lines
+  drawLine(0, -10, 0, 135);
+  
+  c.restore();
+  
+  function animate() {
+  
+      window.requestAnimationFrame(animate);
+  
+      c.clearRect(0, 0, canvas.width, canvas.height);
+  
+      c.save();
+  
+      c.translate(canvas.width / 2, canvas.height / 2);
+  
+      c.drawImage(webpackImage, -175, -130, 350, 391);
+  
+      for (var i = 0; i < explosionPoints.length; i++) {
+          explosionPoints[i].update();
+      }
+  
+      // c.fillText((mouse.x - (canvas.width / 2)) + ", " + (mouse.y - (canvas.height / 2)), mouse.x - (canvas.width / 2) - 50, mouse.y - (canvas.height / 2));
+  
+      c.restore();
+  }
+  animate();
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--title-->
+<script type="text/javascript" src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script><script type="text/javascript">$(document).ready(function(){var OriginTitile = document.title; var titleTime;document.addEventListener('visibilitychange', function(){
+  if (document.hidden){
+      document.title = '歪，你去哪里了？';
+      clearTimeout(titleTime);
+  }else{
+      document.title = '(つェ⊂)咦，又回来了!';
+      titleTime = setTimeout(function() {
+          document.title = OriginTitile;
+      }, 2000); // 2秒后恢复原标题  
+  }
+});});</script><script type="text/javascript" src="https://www.lovepcos.com/usr/plugins/Meting/assets/Meting.min.js?v=2.1.2"></script>
+<script>$(document).on('pjax:complete',function(){if(!$('.post-content').length){ $('.qrcode').css('display', 'none')}else{ $('.qrcode').css('display', 'block')};Hitokoto();});</script>
+
+  <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+  <script src="./js/script.js"></script>
+</body>
+</html>
